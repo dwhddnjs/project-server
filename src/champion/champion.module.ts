@@ -9,7 +9,7 @@ import { ConfigModule } from '@nestjs/config';
     HttpModule.register({
       timeout: 5000,
       maxRedirects: 5,
-      responseType: 'json', // 👈 이거 추가
+      responseType: 'json',
     }),
     ConfigModule,
   ],
