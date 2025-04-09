@@ -1,7 +1,8 @@
 import { HttpService } from '@nestjs/axios';
 import { Injectable } from '@nestjs/common';
-import { catchError, firstValueFrom } from 'rxjs';
+import { firstValueFrom } from 'rxjs';
 import { ConfigService } from '@nestjs/config';
+import { ChampionTypes } from './types/champion.type';
 
 @Injectable()
 export class ChampionService {
@@ -11,25 +12,26 @@ export class ChampionService {
   ) {}
 
   async getChampionList() {
-    const uri = this.configService.get('CHAMPION_URI');
+    const uri = this.configService.get('BASE_CHAMPION_URI');
     try {
-      const response = await firstValueFrom(this.httpService.get(uri));
-
+      const response = await firstValueFrom(
+        this.httpService.get(`${uri}/data/ko_KR/champion.json`),
+      );
       const datas = response.data.data;
       const objToArr = Object.values(datas);
-      const championList = objToArr.map((item: any) => ({
+
+      const championList = objToArr.map((item: ChampionTypes) => ({
         id: item.id,
         key: item.key,
+        verion: item.version,
         name: item.name,
-        image: item.image,
+        image: `${uri}/img/champion/${item.image.full}`,
         tags: item.tags,
       }));
+
       return championList;
     } catch (error) {
       console.log(error);
     }
-
-    // const result = datas.json();
-    return;
   }
 }

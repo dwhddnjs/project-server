@@ -1,5 +1,4 @@
 import { ChampionService } from './champion.service';
-import { HttpService } from '@nestjs/axios';
 import { Controller, Get } from '@nestjs/common';
 
 @Controller('champion')
