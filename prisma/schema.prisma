@@ -6,7 +6,9 @@
 
 generator client {
   provider = "prisma-client-js"
-  output   = "../generated/prisma"
+  // output   = "../generated/prisma"
+  output   = "../node_modules/.prisma/client"
+
 }
 
 datasource db {
@@ -16,12 +18,14 @@ datasource db {
 
 model Champion {
   id Int @default(autoincrement()) @id
+  champion_id String @unique
   key String
   version String
   name String
   icon_image String
-  full_image String
+  splash_image String
   tags String[]
+  updatedAt DateTime @updatedAt
 }
 
 

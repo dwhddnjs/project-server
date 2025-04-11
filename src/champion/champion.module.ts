@@ -3,6 +3,7 @@ import { ChampionController } from './champion.controller';
 import { ChampionService } from './champion.service';
 import { HttpModule } from '@nestjs/axios';
 import { ConfigModule } from '@nestjs/config';
+import { PrismaModule } from 'src/prisma/prisma.module';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { ConfigModule } from '@nestjs/config';
       responseType: 'json',
     }),
     ConfigModule,
+    PrismaModule,
   ],
   controllers: [ChampionController],
   providers: [ChampionService],
