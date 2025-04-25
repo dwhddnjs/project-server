@@ -23,7 +23,8 @@ export class ChampionService implements OnModuleInit {
       if (!championList) {
         throw new Error('챔피언 데이터가 없습니다');
       }
-      return championList;
+      return championList.sort((a, b) => a.name.localeCompare(b.name, 'ko-KR'))
+      
     } catch (error) {
       console.log('error: ', error);
     }
@@ -49,8 +50,8 @@ export class ChampionService implements OnModuleInit {
         key: item.key,
         version: item.version,
         name: item.name,
-        splash_image: `${uri}/${version}/img/champion/${item.image.full}`,
-        icon_image: `${uri}/img/champion/splash/${item.id}_0.jpg`,
+        splash_image: `${uri}/img/champion/splash/${item.id}_0.jpg`,
+        icon_image: `${uri}/${version}/img/champion/${item.image.full}`,
         tags: item.tags,
       }));
 
